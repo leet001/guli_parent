@@ -1,6 +1,7 @@
 package com.atguigu.eduservice.controller;
 
 
+import com.atguigu.eduservice.annotation.ParameterLog;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.entity.vo.TeacherQuery;
 import com.atguigu.eduservice.service.EduTeacherService;
@@ -10,6 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -110,9 +112,9 @@ public class EduTeacherController {
     // 根据讲师id查询
     @GetMapping("getTeacher/{id}")
     @ApiOperation("根据讲师id查询")
+    @ParameterLog
     public R getTeacher(@PathVariable("id") String id) {
-        EduTeacher eduTeacher = eduTeacherService.getById(id);
-        return R.ok().data("eduTeacher", eduTeacher);
+        return eduTeacherService.getTeacher(id);
     }
     // 讲师修改功能
     @PutMapping("/updateTeacher")
