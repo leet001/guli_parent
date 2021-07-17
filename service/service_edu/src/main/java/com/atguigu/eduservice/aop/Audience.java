@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 @Aspect
 @Slf4j
+@Component
 public class Audience {
 
     //用来记录请求进入的时间，防止多线程时出错，这里用了ThreadLocal
